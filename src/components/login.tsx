@@ -1,27 +1,16 @@
 import React, { FormEvent } from "react";
-const baseurl = process.env.REACT_APP_API_URL;
+import { login } from "../auth-provider";
+
 export const Login: React.FC = () => {
-  const loginHandler = (params: { userName: string, password: string }) => {
-    fetch(`${baseurl}/login`, {
-      method: 'post',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(params)
-    }).then((res) => {
-      return res.json()
-    }).then((data) => {
-      console.log(data)
-    })
-  }
+
   // console.log(baseurl);
 
   const submitHandle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const userName = (event.currentTarget.elements[0] as HTMLInputElement).value
+    const username = (event.currentTarget.elements[0] as HTMLInputElement).value
     const password = (event.currentTarget.elements[1] as HTMLInputElement).value
-    loginHandler({
-      userName,
+    login({
+      username,
       password
     })
 
